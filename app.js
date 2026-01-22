@@ -1,6 +1,9 @@
 const express = require("express");
+const boardRoute = require("./routes/board.route");
 
-const app = express();
+const app = express(); // 인스턴스.
+app.use(express.json()); // body데이터(json포맷) 해석.
+app.use("/boards", boardRoute); // 게시판 라우팅.
 
 // 라우팅.
 app.get("/", (req, res) => {

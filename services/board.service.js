@@ -1,7 +1,20 @@
 const pool = require("../db");
 
-async function findAll() {
-  let [rows, result] = await pool.query("select * from board");
-  console.log(rows);
-}
-findAll();
+const service = {
+  findAll: async function () {
+    let [rows, result] = await pool.query("select * from board"); // 배열 구조분해.
+    console.log(rows);
+    return rows;
+  },
+  create: async function (data = {}) {
+    const { title, content, writer } = data; // 객체 구조분해.
+    let result = await pool.query(
+      "insert into board(title,content,writer) values(?,?,?)",
+      [title, content, writer],
+    );
+    console.log(result);
+    return result[0].insertId;
+  },
+};
+
+module.exports = service;
