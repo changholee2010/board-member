@@ -3,7 +3,6 @@ const pool = require("../db");
 const service = {
   findAll: async function () {
     let [rows, result] = await pool.query("select * from board"); // 배열 구조분해.
-    console.log(rows);
     return rows;
   },
   create: async function (data = {}) {
@@ -12,7 +11,6 @@ const service = {
       "insert into board(title,content,writer) values(?,?,?)",
       [title, content, writer],
     );
-    console.log(result);
     return result[0].insertId;
   },
 };
