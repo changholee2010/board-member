@@ -12,6 +12,10 @@ const ctrl = {
     const result = await service.create({ title, content, writer });
     res.send(result);
   },
+  detail: async (req, res) => {
+    console.log(req.params);
+    res.send("처리.");
+  },
 };
 
 module.exports = ctrl;

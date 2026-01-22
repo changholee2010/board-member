@@ -6,6 +6,7 @@ const service = {
     console.log(rows);
     return rows;
   },
+  findById: async function () {},
   create: async function (data = {}) {
     const { title, content, writer } = data; // 객체 구조분해.
     let result = await pool.query(
