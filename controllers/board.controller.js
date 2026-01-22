@@ -13,8 +13,9 @@ const ctrl = {
     res.send(result);
   },
   detail: async (req, res) => {
-    console.log(req.params);
-    res.send("처리.");
+    console.log(req.params.id);
+    const rows = await service.findById(req.params.id);
+    res.send(rows);
   },
 };
 

@@ -5,7 +5,12 @@ const service = {
     let [rows, result] = await pool.query("select * from board"); // 배열 구조분해.
     return rows;
   },
-  findById: async function () {},
+  findById: async function (id) {
+    let [rows, result] = await pool.query("select * from board where id = ?", [
+      id,
+    ]); // 배열 구조분해.
+    return rows;
+  },
   create: async function (data = {}) {
     const { title, content, writer } = data; // 객체 구조분해.
     let result = await pool.query(
