@@ -17,6 +17,17 @@ const ctrl = {
     const rows = await service.findById(req.params.id);
     res.send(rows);
   },
+  update: async (req, res) => {
+    const id = req.params.id;
+    const { title, content } = req.body;
+    const result = await service.update({ title, content, id });
+    // false (falsy : 0, null, "", undefined)
+    if (result) {
+      res.json({ retCode: "OK" });
+    } else {
+      res.json({ retCode: "NG" });
+    }
+  },
 };
 
 module.exports = ctrl;
