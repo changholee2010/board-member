@@ -3,8 +3,17 @@ const service = require("../services/board.service");
 
 const ctrl = {
   list: async (req, res) => {
-    const rows = await service.findAll();
-    res.send(rows);
+    // const rows = await service.findAll();
+    const rows = [
+      {
+        id: 1,
+        title: "test",
+        content: "test content",
+        writer: "user01",
+        created_at: new Date(),
+      },
+    ];
+    res.json(rows);
   },
   create: async (req, res) => {
     // { title: 'postman을 활용', content: 'Post 요청처리하기..', writer: 'user99' }
