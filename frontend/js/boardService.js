@@ -24,6 +24,17 @@ const svc = {
     // 날짜 포맷 출력 => yyyy-mm-dd HH:MM:SS 형태출력 메소드.
     return `${yyyy}-${("0" + mm).slice(-2)}-${("0" + dd).slice(-2)} ${("0" + hh).slice(-2)}:${("0" + mi).slice(-2)}:${("0" + ss).slice(-2)}`;
   },
+  // 등록.
+  addPost(post = {}, callback) {
+    fetch(API_URL, {
+      method: "post",
+      headers: "",
+      body: "",
+    })
+      .then((resp) => resp.json())
+      .then(callback)
+      .catch((err) => console.error(err));
+  },
 };
 
 Date.prototype.formatDate = function () {

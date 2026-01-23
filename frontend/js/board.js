@@ -39,6 +39,7 @@ function loadPagingList() {
     endPage = endPage > realEnd ? realEnd : endPage;
     let prev = startPage == 1 ? false : true; // startPage(1,6,11,16...)
     let next = endPage < realEnd ? true : false; // endPage(5) ? realEnd(26) => 130
+
     // <a href="#" class="page-btn disabled">«</a>
     // 이전페이지.
     let aTag = document.createElement("a");
@@ -67,6 +68,7 @@ function loadPagingList() {
       }
       pagination.appendChild(aTag); // 부모.appendChild.자식
     }
+
     // 이후페이지.
     aTag = document.createElement("a");
     aTag.innerText = "»";
@@ -95,3 +97,5 @@ function loadPagingList() {
   svc.getTotalCount(cb);
 }
 loadPagingList();
+
+// createPost()
