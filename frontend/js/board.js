@@ -42,6 +42,8 @@ loadBoards();
 let page = 3; // page 전역변수.
 function loadPagingList() {
   const pagination = document.querySelector("div.pagination");
+  pagination.innerHTML = ""; // 기존목록 지우기.
+  // 비동기 호출.
   fetch(API_URL + "/totalCount")
     .then((resp) => resp.json())
     .then((data) => {
@@ -53,7 +55,7 @@ function loadPagingList() {
       // 실제 마지막페이지와 비교.
       endPage = endPage > realEnd ? realEnd : endPage;
       let prev = startPage == 1 ? false : true; // startPage(1,6,11,16...)
-
+      let next = endPage < realEnd ? true : false; // endPage(5) ? realEnd(26) => 130
       // <a href="#" class="page-btn disabled">«</a>
       // 이전페이지.
       let aTag = document.createElement("a");
@@ -81,14 +83,27 @@ function loadPagingList() {
         pagination.appendChild(aTag); // 부모.appendChild.자식
       }
       // 이후페이지.
+      aTag = document.createElement("a");
+      aTag.innerText = "»";
+      aTag.setAttribute("href", "#");
+      // 이후페이지의 여부에 따라서 disabled 속성을 지정.
+      if (next) {
+        aTag.className = "page-btn";
+      } else {
+        aTag.className = "page-btn disabled";
+      }
+      pagination.appendChild(aTag); // 부모.appendChild.자식
+
+      // 페이징 생성후 이벤트 등록.
+      // a태그에 클릭이벤트.
+      document.querySelectorAll("div.pagination>a").forEach((elem) => {
+        elem.addEventListener("click", function (e) {
+          page = this.innerText;
+          loadBoards(page);
+          loadPagingList(page);
+        });
+      });
     })
     .catch((err) => console.error(er));
 }
 loadPagingList();
-
-// a태그에 클릭이벤트.
-document.querySelectorAll("div.pagination>a").forEach((elem) => {
-  elem.addEventListener("click", function (e) {
-    loadBoards(this.innerText);
-  });
-});
