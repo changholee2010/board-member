@@ -1,8 +1,10 @@
 const express = require("express");
 const boardRoute = require("./routes/board.route");
+const cors = require("cors");
 
 const app = express(); // 인스턴스.
 app.use(express.json()); // body데이터(json포맷) 해석.
+app.use(cors()); // 요청에 대해 허용.
 
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
