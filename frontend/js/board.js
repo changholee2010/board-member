@@ -103,7 +103,7 @@ function loadPagingList() {
           page = this.dataset.page; // 클릭한 페이지로 변경.
           e.preventDefault(); // a태그 기본이동막기.
           loadBoards(page);
-          loadPagingList(page);
+          loadPagingList();
         });
       });
     })
