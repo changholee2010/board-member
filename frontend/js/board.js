@@ -39,7 +39,7 @@ loadBoards();
 // document.addEventListener("DOMContentLoaded", loadBoards);
 
 // 페이징목록 출력.
-let page = 3; // page 전역변수.
+let page = 1; // page 전역변수.
 function loadPagingList() {
   const pagination = document.querySelector("div.pagination");
   pagination.innerHTML = ""; // 기존목록 지우기.
@@ -61,6 +61,7 @@ function loadPagingList() {
       let aTag = document.createElement("a");
       aTag.innerText = "«";
       aTag.setAttribute("href", "#");
+      aTag.setAttribute("data-page", startPage - 1);
       // 이전페이지의 여부에 따라서 disabled 속성을 지정.
       if (prev) {
         aTag.className = "page-btn";
@@ -74,6 +75,7 @@ function loadPagingList() {
         let aTag = document.createElement("a");
         aTag.innerText = pg; // <a>3</a>
         aTag.setAttribute("href", "#");
+        aTag.setAttribute("data-page", pg);
         // active 페이지 설정.
         if (pg == page) {
           aTag.className = "page-btn active";
@@ -86,6 +88,7 @@ function loadPagingList() {
       aTag = document.createElement("a");
       aTag.innerText = "»";
       aTag.setAttribute("href", "#");
+      aTag.setAttribute("data-page", endPage + 1);
       // 이후페이지의 여부에 따라서 disabled 속성을 지정.
       if (next) {
         aTag.className = "page-btn";
@@ -98,12 +101,13 @@ function loadPagingList() {
       // a태그에 클릭이벤트.
       document.querySelectorAll("div.pagination>a").forEach((elem) => {
         elem.addEventListener("click", function (e) {
-          page = this.innerText;
+          page = this.dataset.page; // 클릭한 페이지로 변경.
+          e.preventDefault(); // a태그 기본이동막기.
           loadBoards(page);
           loadPagingList(page);
         });
       });
     })
-    .catch((err) => console.error(er));
+    .catch((err) => console.error(err));
 }
 loadPagingList();
