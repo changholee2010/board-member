@@ -3,7 +3,8 @@ const service = require("../services/board.service");
 
 const ctrl = {
   list: async (req, res) => {
-    const rows = await service.findAll();
+    const page = req.params.page; // host:3000/pg/:page
+    const rows = await service.findAll(page);
     res.send(rows);
   },
   create: async (req, res) => {
@@ -27,6 +28,12 @@ const ctrl = {
     } else {
       res.json({ retCode: "NG" });
     }
+  },
+  // 전체건수.
+  totalCount: async (req, res) => {
+    const rows = await service.totalCount();
+    console.log(rows);
+    res.send(rows);
   },
 };
 

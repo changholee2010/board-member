@@ -2,8 +2,13 @@ const pool = require("../db");
 
 const service = {
   // 전체 조회.
-  findAll: async function () {
-    let [rows, result] = await pool.query("select * from board"); // 배열 구조분해.
+  findAll: async function (page) {
+    // 1 -> 0, 2 -> 10, 3 -> 20
+    const offset = (page - 1) * 10; // 페이지 에 따른 offset 계산.
+    let [rows, result] = await pool.query(
+      "select * from board order by id limit 10 offset ?",
+      [offset],
+    ); // 배열 구조분해.
     return rows;
   },
   // 단건 조회.
@@ -30,6 +35,10 @@ const service = {
     );
     console.log(result);
     return result[0].affectedRows;
+  },
+  totalCount: async function () {
+    let [rows, result] = await pool.query("select count(*) as cnt from board"); // 배열 구조분해.
+    return rows[0]; // [{"cnt": 320}]
   },
 };
 

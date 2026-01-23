@@ -52,3 +52,45 @@ th {
   background: #333;
   color: #fff;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 30px 0;
+  font-family: Arial, sans-serif;
+}
+
+.page-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 36px;
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+  background-color: #f0f0f0;
+  border-color: #999;
+}
+
+.page-btn.active {
+  background-color: #333;
+  color: #fff;
+  border-color: #333;
+  cursor: default;
+}
+
+.page-btn.disabled {
+  color: #aaa;
+  border-color: #eee;
+  pointer-events: none;
+}
