@@ -98,4 +98,7 @@ function loadPagingList() {
 }
 loadPagingList();
 
-// createPost()
+// 등록 이벤트.
+document.querySelector("button").addEventListener("click", () => {
+  console.log("sss");
+});
