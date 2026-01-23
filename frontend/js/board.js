@@ -36,7 +36,6 @@ function loadBoards(page = 1) {
     .catch((err) => console.error(err));
 }
 loadBoards();
-// document.addEventListener("DOMContentLoaded", loadBoards);
 
 // 페이징목록 출력.
 let page = 1; // page 전역변수.
@@ -51,7 +50,7 @@ function loadPagingList() {
       const totalCnt = data.cnt;
       let endPage = Math.ceil(page / 5) * 5; // 현재페이지를 기준으로 계산한 페이지.
       let startPage = endPage - 4;
-      let realEnd = Math.ceil(totalCnt / 5); // 건수를 기준으로 실제마지막.
+      let realEnd = Math.ceil(totalCnt / 10); // 건수를 기준으로 실제마지막.
       // 실제 마지막페이지와 비교.
       endPage = endPage > realEnd ? realEnd : endPage;
       let prev = startPage == 1 ? false : true; // startPage(1,6,11,16...)
