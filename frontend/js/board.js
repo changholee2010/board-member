@@ -100,5 +100,9 @@ loadPagingList();
 
 // 등록 이벤트.
 document.querySelector("button").addEventListener("click", () => {
-  console.log("sss");
+  const id = document.querySelector("#userid");
+  const content = document.querySelector("#content");
+  const writer = document.querySelector("#writer");
+
+  fetch("");
 });
