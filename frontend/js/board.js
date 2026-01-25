@@ -100,9 +100,21 @@ loadPagingList();
 
 // 등록 이벤트.
 document.querySelector("button").addEventListener("click", () => {
-  const id = document.querySelector("#userid");
+  const title = document.querySelector("#title");
   const content = document.querySelector("#content");
   const writer = document.querySelector("#writer");
 
-  fetch("");
+  const token = `c77b73777ac2c46a13d60e0fd517343ac82d4b67bcd76d5a07572e11296856d0c92d171e634b912d929916867f5a096ea299063d88e971d016e3966897eb0ac5`; // localStorage.getItem("token");
+
+  fetch("http://localhost:3000/boards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify({ title, content, writer }),
+  })
+    .then((resp) => resp.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
 });
