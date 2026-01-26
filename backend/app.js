@@ -1,8 +1,8 @@
 const express = require("express");
-require("dotenv").config();
+// require("dotenv").config();
 
 const boardRoute = require("./routes/board.route");
-const memberRoute = require("./routes/member.route");
+// const memberRoute = require("./routes/member.route");
 
 const cors = require("cors");
 
@@ -18,7 +18,7 @@ app.use(cors()); // 요청에 대해 허용.
 //   next();
 // });
 app.use("/boards", boardRoute); // 게시판 라우팅.
-app.use("/members", memberRoute); // 게시판 라우팅.
+// app.use("/members", memberRoute); // 게시판 라우팅.
 
 // 라우팅.
 app.get("/", (req, res) => {
