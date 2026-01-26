@@ -55,7 +55,7 @@ function loadPagingList() {
     const totalCnt = data.cnt;
     let endPage = Math.ceil(page / 5) * 5; // 현재페이지를 기준으로 계산한 페이지.
     let startPage = endPage - 4;
-    let realEnd = Math.ceil(totalCnt / 10); // 건수를 기준으로 실제마지막.
+    let realEnd = Math.ceil(totalCnt / 6); // 건수를 기준으로 실제마지막.
     // 실제 마지막페이지와 비교.
     endPage = endPage > realEnd ? realEnd : endPage;
     let prev = startPage == 1 ? false : true; // startPage(1,6,11,16...)
@@ -120,20 +120,22 @@ function loadPagingList() {
 loadPagingList();
 
 // 등록 이벤트.
-document.querySelector("button").addEventListener("click", () => {
-  const title = document.querySelector("#title");
-  const content = document.querySelector("#content");
-  const writer = document.querySelector("#writer");
+document.querySelector("button#addBtn").addEventListener("click", () => {
+  const title = document.querySelector("#title").value; // 입력값(제목)
+  const content = document.querySelector("#content").value; // 입력값(내용)
+  const writer = document.querySelector("#writer").value; // 입력값(작성자)
 
-  fetch("http://localhost:3000/boards", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
-    body: JSON.stringify({ title, content, writer }),
-  })
-    .then((resp) => resp.json())
-    .then((data) => console.log(data))
-    .catch((err) => console.log(err));
+  // 필수값 입력.
+  if (!title || !content || !writer) {
+    alert("필수값 입력!");
+    return;
+  }
+
+  // svc 메소드 활용.
+  svc.addBoard({ title, content, writer }, (data) => {
+    // 1페이지 목록.
+    page = 1;
+    loadBoards(page);
+    loadPagingList();
+  });
 });

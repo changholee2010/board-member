@@ -7,11 +7,17 @@ const ctrl = {
     const rows = await service.findAll(page);
     res.send(rows);
   },
+  // 등록.
   create: async (req, res) => {
     // { title: 'postman을 활용', content: 'Post 요청처리하기..', writer: 'user99' }
     const { title, content, writer } = req.body; // fetch('',{method, headers, body})
     const result = await service.create({ title, content, writer });
-    res.send(result);
+    // 신규번호 반환. result > 0 정상.
+    if (result) {
+      res.json({ retCode: "OK" });
+    } else {
+      res.json({ retCode: "NG" });
+    }
   },
   detail: async (req, res) => {
     console.log(req.params.id);

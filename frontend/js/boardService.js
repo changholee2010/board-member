@@ -26,6 +26,20 @@ const svc = {
       .then(callback)
       .catch((err) => console.error(err));
   },
+  // 등록을 위한 메소드.
+  addBoard(board = {}, callback) {
+    // fetch 호출.
+    fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(board),
+    })
+      .then((resp) => resp.json())
+      .then(callback)
+      .catch((err) => console.error(err));
+  },
   // 날짜 포맷.
   formatDate(date) {
     const yyyy = date.getFullYear();

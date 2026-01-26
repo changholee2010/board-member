@@ -4,9 +4,9 @@ const service = {
   // 전체 조회.
   findAll: async function (page) {
     // 1 -> 0, 2 -> 10, 3 -> 20
-    const offset = (page - 1) * 10; // 페이지 에 따른 offset 계산.
+    const offset = (page - 1) * 6; // 페이지 에 따른 offset 계산.
     let [rows, result] = await pool.query(
-      "select * from board order by id limit 10 offset ?",
+      "select * from board order by id desc limit 6 offset ?",
       [offset],
     ); // 배열 구조분해.
     return rows;
