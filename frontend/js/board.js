@@ -16,9 +16,30 @@ function loadBoards(page = 1) {
                      <td>${board.title}</td>
                      <td>${board.writer}</td>
                      <td>${new Date(board.created_at).formatDate()}</td>
+                     <td><button data-no='${board.id}' class='btn-delete'>삭제</button></td>
                    </tr>`;
       target.insertAdjacentHTML("beforeend", str);
     });
+    // 버튼이벤트(삭제)
+    document
+      .querySelectorAll("#boardList button.btn-delete") //대상.
+      .forEach((elem) => {
+        // 이벤트.
+        elem.addEventListener("click", function (e) {
+          const bno = this.dataset.no; // 삭제할 글번호.
+          //삭제 fetch 호출.
+          svc.removeBoard(bno, (data) => {
+            console.log(data);
+            // 성공=>페이지 출력, 실패=>alert(에러)
+            if (data.retCode == "OK") {
+              loadBoards(page);
+              loadPagingList();
+            } else {
+              alert("예외발생!");
+            }
+          });
+        });
+      });
   });
 }
 loadBoards();

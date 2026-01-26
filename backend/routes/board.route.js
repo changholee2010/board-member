@@ -9,5 +9,6 @@ router.get("/:id", ctrl.detail); // 단건조회.
 router.post("/", ctrl.create); // 등록.
 router.put("/:id", ctrl.update); // 수정.
 // 삭제 (delete, 컨트롤: remove, 서비스: remove)
+router.delete("/:id", ctrl.remove);
 
 module.exports = router;

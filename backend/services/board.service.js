@@ -27,12 +27,19 @@ const service = {
     );
     return result[0].insertId;
   },
+  // 수정.
   update: async function (data = {}) {
     const { title, content, id } = data; // 객체 구조분해.
     let result = await pool.query(
       "update board set title = ?, content = ? where id = ?",
       [title, content, id],
     );
+    console.log(result);
+    return result[0].affectedRows;
+  },
+  // 삭제.
+  remove: async function (id) {
+    let result = await pool.query("delete from board where id = ?", [id]);
     console.log(result);
     return result[0].affectedRows;
   },

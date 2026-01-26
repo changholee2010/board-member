@@ -53,6 +53,15 @@ th {
   color: #fff;
 }
 
+.btn-delete {
+  background-color: red;
+  color: rgb(247, 243, 16);
+  padding: 3px 10px;
+  border-color: red;
+  border-radius: 10%;
+  margin: 3px;
+}
+
 .pagination {
   display: flex;
   justify-content: center;
