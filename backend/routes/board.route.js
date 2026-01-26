@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const ctrl = require("../controllers/board.controller");
+// const auth = require("../middlewares/auth");
 
 // 라우팅.
 // http://localhost:3000/boards/5

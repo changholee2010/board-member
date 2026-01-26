@@ -121,5 +121,19 @@ loadPagingList();
 
 // 등록 이벤트.
 document.querySelector("button").addEventListener("click", () => {
-  console.log("sss");
+  const title = document.querySelector("#title");
+  const content = document.querySelector("#content");
+  const writer = document.querySelector("#writer");
+
+  fetch("http://localhost:3000/boards", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify({ title, content, writer }),
+  })
+    .then((resp) => resp.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
 });
