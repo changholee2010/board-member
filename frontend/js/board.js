@@ -133,9 +133,14 @@ document.querySelector("button#addBtn").addEventListener("click", () => {
 
   // svc 메소드 활용.
   svc.addBoard({ title, content, writer }, (data) => {
-    // 1페이지 목록.
-    page = 1;
-    loadBoards(page);
-    loadPagingList();
+    // 성공.
+    if (data.retCode == "OK") {
+      // 1페이지 목록.
+      page = 1;
+      loadBoards(page);
+      loadPagingList();
+    } else {
+      alert("등록 예외!");
+    }
   });
 });

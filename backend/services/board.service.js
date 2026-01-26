@@ -25,7 +25,7 @@ const service = {
       "insert into board(title,content,writer) values(?,?,?)",
       [title, content, writer],
     );
-    return result[0].insertId;
+    return result[0].insertId; // 신규글번호.
   },
   // 수정.
   update: async function (data = {}) {

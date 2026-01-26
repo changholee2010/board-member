@@ -60,6 +60,7 @@ th {
   border-color: red;
   border-radius: 10%;
   margin: 3px;
+  cursor: pointer;
 }
 
 .pagination {
