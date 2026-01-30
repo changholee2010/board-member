@@ -1,29 +1,15 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const Member = require("../models/member.model");
+const db = require("../db");
 
-exports.register = async (data) => {
-  const hash = await bcrypt.hash(data.password, 10);
-  return Member.create({
-    userid: data.userid,
-    password: hash,
-    name: data.name,
-  });
+const service = {
+  // 회원등록.
+  register: async (data = {}) => {
+    const { user_id, user_pw, user_name } = data;
+    const [result, schem] = await db.query(
+      "insert into member(user_id, user_pw, user_name) values(?,?,?)",
+      [user_id, user_pw, user_name],
+    );
+    return result;
+  },
 };
 
-exports.login = async (userid, password) => {
-  const [rows] = await Member.findByUserId(userid);
-  if (!rows.length) throw new Error("존재하지 않는 사용자");
-
-  const user = rows[0];
-  const match = await bcrypt.compare(password, user.password);
-  if (!match) throw new Error("비밀번호 불일치");
-
-  const token = jwt.sign(
-    { id: user.id, userid: user.userid },
-    process.env.JWT_SECRET,
-    { expiresIn: "1h" },
-  );
-
-  return token;
-};
+module.exports = service;

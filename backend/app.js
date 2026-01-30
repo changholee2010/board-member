@@ -1,7 +1,7 @@
 const express = require("express");
 
 const boardRoute = require("./routes/board.route");
-// const memberRoute = require("./routes/member.route");
+const memberRoute = require("./routes/member.route");
 
 const cors = require("cors"); // application/json 요청.
 
@@ -18,7 +18,7 @@ app.use(cors()); // 요청에 대해 허용.
 // });
 
 app.use("/boards", boardRoute); // 게시판 라우팅.
-// app.use("/members", memberRoute); // 게시판 라우팅.
+app.use("/members", memberRoute); // 회원관리 라우팅.
 
 // 라우팅.
 app.get("/", (req, res) => {

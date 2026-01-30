@@ -1,19 +1,15 @@
 const service = require("../services/member.service");
-
-exports.register = async (req, res) => {
-  try {
-    await service.register(req.body);
-    res.json({ message: "회원가입 성공" });
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// req, res => 활용해서 기능.
+const ctrl = {
+  register: (req, res) => {
+    const { user_id, user_pw, user_name } = req.body;
+    // 등록.
+    // user_id, user_pw, user_name
+    const result = service.register({ user_id, user_pw, user_name });
+    console.log(result);
+    // 응답.
+    res.send("처리완료");
+  },
 };
 
-exports.login = async (req, res) => {
-  try {
-    const token = await service.login(req.body.userid, req.body.password);
-    res.json({ token });
-  } catch (err) {
-    res.status(401).json({ message: err.message });
-  }
-};
+module.exports = ctrl;
