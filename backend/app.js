@@ -1,10 +1,9 @@
 const express = require("express");
-// require("dotenv").config();
 
 const boardRoute = require("./routes/board.route");
 // const memberRoute = require("./routes/member.route");
 
-const cors = require("cors");
+const cors = require("cors"); // application/json 요청.
 
 const app = express(); // 인스턴스.
 app.use(express.json()); // body데이터(json포맷) 해석.
@@ -17,6 +16,7 @@ app.use(cors()); // 요청에 대해 허용.
 //   if (req.method === "OPTIONS") return res.sendStatus(200);
 //   next();
 // });
+
 app.use("/boards", boardRoute); // 게시판 라우팅.
 // app.use("/members", memberRoute); // 게시판 라우팅.
 
